@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
+// Same shape as form; cacheComponents/partialPrefetching dropped since the adapter doesn't need them and the page is static.
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
   turbopack: {
     rules: {
       "*.css": {
