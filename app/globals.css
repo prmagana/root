@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+/* Same tokens the tools use, so their nav pieces drop in unchanged. Light only for now. */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}

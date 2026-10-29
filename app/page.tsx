@@ -1,3 +1,4 @@
+import { Nav } from "./nav";
 import Socials from "./socials";
 import TelegramMark from "./telegram-mark";
 import ToolButton from "./tool-button";
@@ -6,9 +7,9 @@ import ToolButton from "./tool-button";
 export default function Home() {
   return (
     <>
-      {/* Absolute so the links below center on the full viewport, not the space under the bar. */}
-      <header className="absolute inset-x-0 top-0 flex justify-center p-6">
-        <Socials />
+      {/* Nav and socials sit outside the flow so the stack centers on the full viewport. */}
+      <header className="absolute inset-x-0 top-0 flex justify-end p-6">
+        <Nav />
       </header>
       <main className="flex flex-1 flex-col items-center justify-center gap-3 px-4">
         {/* Mark for the stack: the tools all run on Telegram. */}
@@ -18,6 +19,9 @@ export default function Home() {
         <ToolButton label="Former" href="https://form.tapt.so" />
         <ToolButton label="Booker" href="https://book.tapt.so" />
       </main>
+      <footer className="absolute inset-x-0 bottom-0 flex justify-center p-6">
+        <Socials />
+      </footer>
     </>
   );
 }

@@ -61,6 +61,11 @@ export function oidcCookie(value: string) {
   return { name: OIDC_COOKIE, value, ...base, maxAge: OIDC_MAX_AGE };
 }
 
-export function clearCookie(name: string, domain?: string) {
-  return { name, value: "", ...base, domain, maxAge: 0 };
+export function clearCookie(name: string) {
+  return { name, value: "", ...base, maxAge: 0 };
+}
+
+// Clearing must name the domain, or the browser keeps the parent-domain cookie and you stay in.
+export function clearSessionCookie() {
+  return { name: SESSION_COOKIE, value: "", ...base, domain: SESSION_DOMAIN, maxAge: 0 };
 }
