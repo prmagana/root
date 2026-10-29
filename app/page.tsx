@@ -1,13 +1,18 @@
-﻿import { Nav } from "./nav";
+import { cookies } from "next/headers";
+import { Nav } from "./nav";
 import Socials from "./socials";
+import ThemeToggle from "./theme-toggle";
 import TonPrice from "./ton-price";
 import ToolButton from "./tool-button";
+import { readTheme, THEME_COOKIE } from "@/lib/theme";
 
 // Hub for tapt; links to each repo go here.
-export default function Home() {
+export default async function Home() {
+  const theme = readTheme((await cookies()).get(THEME_COOKIE)?.value);
+
   return (
     <>
-      {/* Nav and socials sit outside the flow so the stack centers on the full viewport. */}
+      {/* Nav and footer sit outside the flow so the stack centers on the full viewport. */}
       <header className="absolute inset-x-0 top-0">
         <Nav />
       </header>
@@ -20,10 +25,20 @@ export default function Home() {
           <ToolButton label="Booker" href="https://book.tapt.so" width="w-[calc(100%-48px)]" />
         </div>
       </main>
-      {/* Wraps on narrow screens so the price sits above the socials instead of squeezing them. */}
-      <footer className="absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-center gap-3 p-6">
-        <TonPrice />
-        <Socials />
+      {/* The nav's container, so the pills line up under the mark and the sign-in. Three columns keep the socials
+          dead centre whatever sits beside them; on phones the socials take their own row beneath the two pills. */}
+      <footer className="absolute inset-x-0 bottom-0 px-4 pb-6 sm:px-6">
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-2 items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
+          <div className="col-start-1 row-start-1 justify-self-start">
+            <TonPrice />
+          </div>
+          <div className="col-span-2 row-start-2 justify-self-center sm:col-span-1 sm:col-start-2 sm:row-start-1">
+            <Socials />
+          </div>
+          <div className="col-start-2 row-start-1 justify-self-end sm:col-start-3">
+            <ThemeToggle initial={theme} />
+          </div>
+        </div>
       </footer>
     </>
   );

@@ -36,7 +36,7 @@ export default function ToolButton({ label, href, width = "w-full" }: { label: s
       onPointerLeave={up}
       draggable={false}
       // No transition: hover snaps so moving between buttons stays crisp.
-      className={`block w-full select-none rounded-lg border border-zinc-200 bg-white px-6 py-4 text-center text-[22px] font-semibold leading-tight tracking-tight shadow-md hover:border-zinc-300 hover:bg-zinc-50`}
+      className={`block w-full select-none rounded-lg border border-edge bg-surface px-6 py-4 text-center text-[22px] font-semibold leading-tight tracking-tight shadow-md hover:border-zinc-300 hover:bg-zinc-50 dark:hover:border-zinc-700 dark:hover:bg-zinc-800`}
     >
       {label}
     </a>

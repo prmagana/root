@@ -67,11 +67,11 @@ export default function Socials() {
       onMouseLeave={hide}
       // Only hide on blur when focus leaves the bar entirely, so tabbing glides too.
       onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && hide()}
-      className="relative flex items-center gap-1 rounded-full border border-zinc-200 bg-white p-1 shadow-md"
+      className="relative flex items-center gap-1 rounded-full border border-edge bg-surface p-1 shadow-md"
     >
       <motion.span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-y-1 left-0 w-9 rounded-full bg-zinc-100"
+        className="pointer-events-none absolute inset-y-1 left-0 w-9 rounded-full bg-spot"
         style={{ x: sx }}
         initial={false}
         animate={{ opacity: visible ? 1 : 0 }}
@@ -87,15 +87,15 @@ export default function Socials() {
           rel="noopener noreferrer"
           onMouseEnter={(e) => show(e.currentTarget)}
           onFocus={(e) => show(e.currentTarget)}
-          className="relative flex size-9 items-center justify-center rounded-full text-zinc-400 outline-none"
+          className="relative flex size-9 items-center justify-center rounded-full text-muted outline-none"
         >
           {icon(path, viewBox, nudge)}
         </a>
       ))}
-      {/* Black layer: same layout stacked on top, clipped to the circle so it reveals as the circle moves. */}
+      {/* Ink layer: same layout stacked on top, clipped to the circle so it reveals as the circle moves. */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center gap-1 p-1 text-black"
+        className="pointer-events-none absolute inset-0 flex items-center gap-1 p-1 text-ink"
         style={{ clipPath: clip }}
         initial={false}
         animate={{ opacity: visible ? 1 : 0 }}
