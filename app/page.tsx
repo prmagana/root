@@ -1,4 +1,4 @@
-import { Nav } from "./nav";
+﻿import { Nav } from "./nav";
 import Socials from "./socials";
 import ToolButton from "./tool-button";
 
@@ -11,10 +11,11 @@ export default function Home() {
         <Nav />
       </header>
       <main className="flex flex-1 flex-col items-center justify-center gap-3 px-4">
-        <ToolButton label="Tracker" href="https://track.tapt.so" />
-        <ToolButton label="Player" href="https://play.tapt.so" />
-        <ToolButton label="Former" href="https://form.tapt.so" />
-        <ToolButton label="Booker" href="https://book.tapt.so" />
+        {/* Each row 16px narrower than the one above. */}
+        <ToolButton label="Tracker" href="https://track.tapt.so" width="max-w-[384px]" />
+        <ToolButton label="Player" href="https://play.tapt.so" width="max-w-[368px]" />
+        <ToolButton label="Former" href="https://form.tapt.so" width="max-w-[352px]" />
+        <ToolButton label="Booker" href="https://book.tapt.so" width="max-w-[336px]" />
       </main>
       <footer className="absolute inset-x-0 bottom-0 flex justify-center p-6">
         <Socials />
