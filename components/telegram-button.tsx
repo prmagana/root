@@ -25,7 +25,7 @@ function ArrowRight({ className }: { className?: string }) {
 
 const spring = { type: "spring", stiffness: 600, damping: 28 } as const;
 
-// Same button as the tools' login pages. Rest: plane on the left. Hover: plane pops out, arrow pops in.
+// Same button as the tools' login pages, in black for the hub. Rest: plane on the left. Hover: plane pops out, arrow pops in.
 export function TelegramButton({ href }: { href: string }) {
   const [hovered, setHovered] = useState(false);
 
@@ -41,7 +41,7 @@ export function TelegramButton({ href }: { href: string }) {
       // No hover scale: the icon slide carries the motion and the text stays pixel-sharp.
       whileTap={{ scale: 0.96 }}
       // relative: popLayout pops exiting icons out as absolute, so they must anchor to the button, not the page.
-      className="relative flex h-9 cursor-pointer select-none items-center justify-center rounded-md bg-[#2AABEE] px-5 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2AABEE]"
+      className="relative flex h-9 cursor-pointer select-none items-center justify-center rounded-md bg-black px-5 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
     >
       <AnimatePresence mode="popLayout">
         {!hovered && (
@@ -59,7 +59,7 @@ export function TelegramButton({ href }: { href: string }) {
       </AnimatePresence>
 
       <motion.span layout="position" transition={spring} className="text-[13px] leading-[18px] font-semibold">
-        Continue with Telegram
+        Connect Telegram
       </motion.span>
 
       <AnimatePresence mode="popLayout">
