@@ -41,7 +41,7 @@ export function TelegramButton({ href }: { href: string }) {
       // No hover scale: the icon slide carries the motion and the text stays pixel-sharp.
       whileTap={{ scale: 0.96 }}
       // relative: popLayout pops exiting icons out as absolute, so they must anchor to the button, not the page.
-      className="relative flex h-9 cursor-pointer select-none items-center justify-center rounded-md bg-black px-5 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+      className="relative flex h-9 cursor-pointer select-none items-center justify-center rounded-lg bg-black px-3.5 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
     >
       <AnimatePresence mode="popLayout">
         {!hovered && (
@@ -51,14 +51,14 @@ export function TelegramButton({ href }: { href: string }) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -10 }}
             transition={spring}
-            className="mr-2.5 flex shrink-0 items-center"
+            className="mr-2 flex shrink-0 items-center"
           >
-            <TelegramMark className="h-4 w-4" />
+            <TelegramMark className="size-[18px]" />
           </motion.span>
         )}
       </AnimatePresence>
 
-      <motion.span layout="position" transition={spring} className="text-[13px] leading-[18px] font-semibold">
+      <motion.span layout="position" transition={spring} className="text-[15px] leading-[18px] font-semibold">
         Connect Telegram
       </motion.span>
 
@@ -70,9 +70,9 @@ export function TelegramButton({ href }: { href: string }) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
             transition={spring}
-            className="ml-2.5 flex shrink-0 items-center"
+            className="ml-2 flex shrink-0 items-center"
           >
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="size-[18px]" />
           </motion.span>
         )}
       </AnimatePresence>
