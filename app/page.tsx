@@ -1,5 +1,6 @@
 ﻿import { Nav } from "./nav";
 import Socials from "./socials";
+import TonPrice from "./ton-price";
 import ToolButton from "./tool-button";
 
 // Hub for tapt; links to each repo go here.
@@ -19,7 +20,9 @@ export default function Home() {
           <ToolButton label="Booker" href="https://book.tapt.so" width="w-[calc(100%-48px)]" />
         </div>
       </main>
-      <footer className="absolute inset-x-0 bottom-0 flex justify-center p-6">
+      {/* Wraps on narrow screens so the price sits above the socials instead of squeezing them. */}
+      <footer className="absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-center gap-3 p-6">
+        <TonPrice />
         <Socials />
       </footer>
     </>
