@@ -6,6 +6,15 @@ import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 // Icon paths are from Simple Icons, all drawn on a 24x24 grid.
 const socials = [
   {
+    label: "Telegram",
+    href: "https://t.me/prmagana",
+    // The app's own plane, same path as telegram-mark.tsx; its box is not 24x24 so it carries its own.
+    viewBox: "1 5.5 45 37",
+    // The tip reaches the right edge of its box, so it needs a push left to look centered.
+    nudge: "-translate-x-px translate-y-[0.5px]",
+    path: "M41.4193 7.30899C41.4193 7.30899 45.3046 5.79399 44.9808 9.47328C44.8729 10.9883 43.9016 16.2908 43.1461 22.0262L40.5559 39.0159C40.5559 39.0159 40.3401 41.5048 38.3974 41.9377C36.4547 42.3705 33.5408 40.4227 33.0011 39.9898C32.5694 39.6652 24.9068 34.7955 22.2086 32.4148C21.4531 31.7655 20.5897 30.4669 22.3165 28.9519L33.6487 18.1305C34.9438 16.8319 36.2389 13.8019 30.8426 17.4812L15.7331 27.7616C15.7331 27.7616 14.0063 28.8437 10.7686 27.8698L3.75342 25.7055C3.75342 25.7055 1.16321 24.0823 5.58815 22.459C16.3807 17.3729 29.6555 12.1786 41.4193 7.30899Z",
+  },
+  {
     label: "YouTube",
     href: "https://www.youtube.com/@prmagaña",
     path: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z",
@@ -46,8 +55,8 @@ export default function Socials() {
   };
   const hide = () => setVisible(false);
 
-  const icon = (path: string) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-5">
+  const icon = (path: string, viewBox = "0 0 24 24", nudge = "") => (
+    <svg viewBox={viewBox} fill="currentColor" aria-hidden="true" className={`size-5 ${nudge}`}>
       <path d={path} />
     </svg>
   );
@@ -68,7 +77,7 @@ export default function Socials() {
         transition={{ duration: 0.15 }}
       />
       {/* Grey layer: the "glass". Links live here so hover and focus keep working. */}
-      {socials.map(({ label, href, path }) => (
+      {socials.map(({ label, href, path, viewBox, nudge }) => (
         <a
           key={label}
           href={href}
@@ -79,7 +88,7 @@ export default function Socials() {
           onFocus={(e) => show(e.currentTarget)}
           className="relative flex size-9 items-center justify-center rounded-full text-zinc-400 outline-none"
         >
-          {icon(path)}
+          {icon(path, viewBox, nudge)}
         </a>
       ))}
       {/* Black layer: same layout stacked on top, clipped to the circle so it reveals as the circle moves. */}
@@ -91,9 +100,9 @@ export default function Socials() {
         animate={{ opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.15 }}
       >
-        {socials.map(({ label, path }) => (
+        {socials.map(({ label, path, viewBox, nudge }) => (
           <span key={label} className="flex size-9 items-center justify-center">
-            {icon(path)}
+            {icon(path, viewBox, nudge)}
           </span>
         ))}
       </motion.div>

@@ -27,8 +27,8 @@ export default function ToolButton({ label, href }: { label: string; href: strin
     <a
       ref={ref}
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+     
+     
       onPointerDown={down}
       onPointerUp={up}
       onPointerCancel={up}
