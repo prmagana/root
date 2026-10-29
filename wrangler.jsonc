@@ -11,6 +11,16 @@
   "compatibility_date": "2026-10-27",
   "compatibility_flags": ["nodejs_compat"],
   "upload_source_maps": true,
+  // Shared accounts table for every tapt tool. Root owns the schema; the lander never reads it.
+  // Apply changes from this folder: npx wrangler d1 migrations apply accounts --remote
+  "d1_databases": [
+    {
+      "binding": "ACCOUNTS",
+      "database_name": "accounts",
+      "database_id": "b3577be4-f7b8-4bdb-9cec-81e4e4af3841",
+      "migrations_dir": "migrations"
+    }
+  ],
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
