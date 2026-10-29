@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       {/* Nav and socials sit outside the flow so the stack centers on the full viewport. */}
-      <header className="absolute inset-x-0 top-0 flex justify-end p-6">
+      <header className="absolute inset-x-0 top-0">
         <Nav />
       </header>
       <main className="flex flex-1 flex-col items-center justify-center gap-3 px-4">

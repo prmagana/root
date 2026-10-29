@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import TelegramMark from "./telegram-mark";
+import TelegramMark from "@/app/telegram-mark";
 
 // Lucide's arrow-right, inlined to avoid a dependency for one icon.
 function ArrowRight({ className }: { className?: string }) {

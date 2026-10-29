@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Caret } from "./caret";
+import { Caret } from "@/components/caret";
 
 type Props = { name: string; picture: string | null };
 
