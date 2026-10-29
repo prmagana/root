@@ -8,8 +8,8 @@ const press = { type: "spring", stiffness: 700, damping: 32 } as const;
 const settle = { type: "spring", stiffness: 260, damping: 26 } as const;
 
 // One card per tapt tool; the page stacks these.
-// width is a max-width class; the page steps it down the stack.
-export default function ToolButton({ label, href, width = "max-w-sm" }: { label: string; href: string; width?: string }) {
+// width is a width class relative to the stack; the page steps it down.
+export default function ToolButton({ label, href, width = "w-full" }: { label: string; href: string; width?: string }) {
   const ref = useRef<HTMLAnchorElement>(null);
   const pressed = useRef(false);
 
@@ -26,7 +26,7 @@ export default function ToolButton({ label, href, width = "max-w-sm" }: { label:
 
   return (
     // A shallow 3D tilt so the card reads as a narrow-bottomed trapezoid while keeping its rounding.
-    <div className={`w-full ${width} [transform:perspective(700px)_rotateX(-8deg)]`}>
+    <div className={`${width} [transform:perspective(700px)_rotateX(-8deg)]`}>
     <a
       ref={ref}
       href={href}
