@@ -17,8 +17,14 @@ async function history(): Promise<number[] | null> {
   const end = Math.floor(Date.now() / 1000 / TTL) * TTL;
   const url = `${CHART_URL}&start_date=${end - WINDOW}&end_date=${end}`;
   try {
+    // The key moves tonapi's quota off Cloudflare's shared egress IPs, which other Workers exhaust, onto us.
+    // Optional so dev still works from your own IP without one.
+    const key = process.env.TONAPI_KEY;
     // Edge cache, not Next's data cache: OpenNext has no store for the latter, so it would refetch per request.
-    const res = await fetch(url, { cf: { cacheTtl: TTL, cacheEverything: true } });
+    const res = await fetch(url, {
+      headers: key ? { Authorization: `Bearer ${key}` } : undefined,
+      cf: { cacheTtl: TTL, cacheEverything: true },
+    });
     if (!res.ok) {
       // The pill just drops out, so without this a bad upstream would vanish silently.
       console.error("ton price: upstream", res.status);
