@@ -26,16 +26,18 @@ export default async function Home() {
         </div>
       </main>
       {/* The nav's container, so the pills line up under the mark and the sign-in. Three columns keep the socials
-          dead centre whatever sits beside them; on phones the socials take their own row beneath the two pills. */}
-      <footer className="absolute inset-x-0 bottom-0 px-4 pb-6 sm:px-6">
-        <div className="mx-auto grid w-full max-w-6xl grid-cols-2 items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
-          <div className="col-start-1 row-start-1 justify-self-start">
+          dead centre whatever sits beside them. The side pills never move: when the row is too narrow for all three they
+          hide, not wrap. The footer is the container; 426px is the socials' 206 plus the wider side pill, 98, on both sides
+          so the centre holds, plus the two 12px gaps. Hidden, not unmounted, so the price still fetches for every visit. */}
+      <footer className="@container absolute inset-x-0 bottom-0 px-4 pb-6 sm:px-6">
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-3 @min-[426px]:grid-cols-[1fr_auto_1fr]">
+          <div className="hidden @min-[426px]:col-start-1 @min-[426px]:block @min-[426px]:justify-self-start">
             <TonPrice />
           </div>
-          <div className="col-span-2 row-start-2 justify-self-center sm:col-span-1 sm:col-start-2 sm:row-start-1">
+          <div className="justify-self-center @min-[426px]:col-start-2">
             <Socials />
           </div>
-          <div className="col-start-2 row-start-1 justify-self-end sm:col-start-3">
+          <div className="hidden @min-[426px]:col-start-3 @min-[426px]:block @min-[426px]:justify-self-end">
             <ThemeToggle initial={theme} />
           </div>
         </div>
