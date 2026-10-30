@@ -4,24 +4,29 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import GramMark from "./gram-mark";
 
+// The one market page that carries the Gram rename, so the click lands on the same name the pill shows.
+const CHART_URL = "https://coinmarketcap.com/currencies/gram/";
+
 // Same spring as the Telegram button so the two ticks read as one gesture.
 const spring = { type: "spring", stiffness: 600, damping: 28 } as const;
 
 type Props = { path: string; price: string; width: number; height: number };
 
-// Rest: the 24h line. Hover: it ticks up and out, the mark and price tick up in.
+// Rest: the 24h line. Hover: it ticks up and out, the mark and price tick up in. Click: the full chart.
 export default function TonPill({ path, price, width, height }: Props) {
   const [hovered, setHovered] = useState(false);
-  // Click does nothing yet; hover alone flips the face.
+  // Hover alone flips the face; the click navigates.
   const showPrice = hovered;
 
   return (
-    // A widget: fixed 98 by 46 box, the socials' height, the line's 64px plus 16px a side. Faces center in it.
-    <motion.button
-      type="button"
+    // A link, not a button, since it leaves the page. Fixed 98 by 46 box, the socials' height, the line's 64px plus 16px a side.
+    <motion.a
+      href={CHART_URL}
+      target="_blank"
+      rel="noopener noreferrer"
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      aria-label={`TON ${price}, last 24h`}
+      aria-label={`TON ${price}, last 24h. Full chart on CoinMarketCap`}
       className="relative flex h-[46px] w-[98px] cursor-pointer items-center justify-center rounded-full border border-edge bg-surface shadow-md outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
     >
       {/* initial={false}: the server-rendered chart must not animate in on load. */}
@@ -78,6 +83,6 @@ export default function TonPill({ path, price, width, height }: Props) {
           </motion.span>
         )}
       </AnimatePresence>
-    </motion.button>
+    </motion.a>
   );
 }
