@@ -19,12 +19,17 @@ async function history(): Promise<number[] | null> {
   try {
     // Edge cache, not Next's data cache: OpenNext has no store for the latter, so it would refetch per request.
     const res = await fetch(url, { cf: { cacheTtl: TTL, cacheEverything: true } });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      // The pill just drops out, so without this a bad upstream would vanish silently.
+      console.error("ton price: upstream", res.status);
+      return null;
+    }
     const points = ((await res.json()) as Chart).points;
     if (!points || points.length < 2) return null;
     // tonapi returns newest first.
     return points.map(([, usd]) => usd).reverse();
-  } catch {
+  } catch (err) {
+    console.error("ton price: fetch failed", err);
     return null;
   }
 }

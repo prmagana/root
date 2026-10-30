@@ -54,20 +54,26 @@ export default function TonPill({ path, price, width, height }: Props) {
             {/* overflow-visible: the round caps reach a pixel past the first and last point. */}
             <svg aria-hidden width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
               <defs>
-                {/* Fades in from the day's start to full colour at now. userSpaceOnUse spans the box, not the path's bbox. */}
-                <linearGradient id="ton-line" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={width} y2="0">
-                  <stop offset="0" stopColor="currentColor" stopOpacity="0.2" />
-                  <stop offset="1" stopColor="currentColor" stopOpacity="1" />
+                {/* One horizontal fade for the line and its glow together, so neither starts with an edge. */}
+                <linearGradient id="ton-fade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={width} y2="0">
+                  <stop offset="0" stopColor="#fff" stopOpacity="0" />
+                  <stop offset="1" stopColor="#fff" stopOpacity="1" />
+                </linearGradient>
+                {/* Bounds take in the overflowing caps; the gradient is clamped past its ends. */}
+                <mask id="ton-mask" maskUnits="userSpaceOnUse" x="-2" y="-2" width={width + 4} height={height + 4}>
+                  <rect x="-2" y="-2" width={width + 4} height={height + 4} fill="url(#ton-fade)" />
+                </mask>
+                {/* The glow under the line: the same blue, faint at the top of the box and gone by the bottom. */}
+                <linearGradient id="ton-area" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2={height}>
+                  <stop offset="0" stopColor="currentColor" stopOpacity="0.15" />
+                  <stop offset="1" stopColor="currentColor" stopOpacity="0" />
                 </linearGradient>
               </defs>
-              <path
-                d={path}
-                fill="none"
-                stroke="url(#ton-line)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <g mask="url(#ton-mask)">
+                {/* Same curve closed down to the floor, drawn first so the stroke sits on top of it. */}
+                <path d={`${path}L${width} ${height}L0 ${height}Z`} fill="url(#ton-area)" />
+                <path d={path} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </g>
             </svg>
           </motion.span>
         )}
