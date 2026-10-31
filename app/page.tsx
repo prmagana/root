@@ -19,10 +19,12 @@ export default async function Home() {
       <main className="flex flex-1 flex-col items-center justify-center px-4">
         {/* The stack caps at 384px; each row is 16px narrower than the one above at any width. */}
         <div className="flex w-full max-w-sm flex-col items-center gap-3">
-          <ToolButton label="Tracker" href="https://track.tapt.so" />
-          <ToolButton label="Player" href="https://play.tapt.so" width="w-[calc(100%-16px)]" />
-          <ToolButton label="Former" href="https://form.tapt.so" width="w-[calc(100%-32px)]" />
-          <ToolButton label="Booker" href="https://book.tapt.so" width="w-[calc(100%-48px)]" />
+          {/* The offer sits on top, inverted: a call funnel for operators moving their stack to tapt. */}
+          <ToolButton label="Migrate" href="https://tapt.software" tone="ink" />
+          <ToolButton label="Tracker" href="https://track.tapt.so" width="w-[calc(100%-16px)]" />
+          <ToolButton label="Player" href="https://play.tapt.so" width="w-[calc(100%-32px)]" />
+          <ToolButton label="Former" href="https://form.tapt.so" width="w-[calc(100%-48px)]" />
+          <ToolButton label="Booker" href="https://book.tapt.so" width="w-[calc(100%-64px)]" />
         </div>
       </main>
       {/* The nav's container, so the pills line up under the mark and the sign-in. Three columns keep the socials

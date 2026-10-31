@@ -9,7 +9,16 @@ const settle = { type: "spring", stiffness: 260, damping: 26 } as const;
 
 // One card per tapt tool; the page stacks these.
 // width is a width class relative to the stack; the page steps it down.
-export default function ToolButton({ label, href, width = "w-full" }: { label: string; href: string; width?: string }) {
+// tone: surface is the tools' card; ink inverts it, black on white pages and white on black ones.
+type Props = { label: string; href: string; width?: string; tone?: "surface" | "ink" };
+
+// Hover snaps one zinc step, in the direction the face can go.
+const faces = {
+  surface: "border-edge bg-surface hover:border-zinc-300 hover:bg-zinc-50 dark:hover:border-zinc-700 dark:hover:bg-zinc-800",
+  ink: "border-ink bg-ink text-background hover:border-zinc-800 hover:bg-zinc-800 dark:hover:border-zinc-200 dark:hover:bg-zinc-200",
+};
+
+export default function ToolButton({ label, href, width = "w-full", tone = "surface" }: Props) {
   const ref = useRef<HTMLAnchorElement>(null);
   const pressed = useRef(false);
 
@@ -36,7 +45,7 @@ export default function ToolButton({ label, href, width = "w-full" }: { label: s
       onPointerLeave={up}
       draggable={false}
       // No transition: hover snaps so moving between buttons stays crisp.
-      className={`block w-full select-none rounded-lg border border-edge bg-surface px-6 py-4 text-center text-[22px] font-semibold leading-tight tracking-tight shadow-md hover:border-zinc-300 hover:bg-zinc-50 dark:hover:border-zinc-700 dark:hover:bg-zinc-800`}
+      className={`block w-full select-none rounded-lg border px-6 py-4 text-center text-[22px] font-semibold leading-tight tracking-tight shadow-md ${faces[tone]}`}
     >
       {label}
     </a>
